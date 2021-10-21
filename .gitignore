@@ -4,6 +4,7 @@ coverage
 coverage.json
 typechain
 notes
+.DS_Store
 
 #Hardhat files
 cache
