@@ -7,11 +7,15 @@ import { ethers } from "ethers";
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const OPENSEA_LINK = "";
-const TOTAL_MINT_COUNT = 50;
+var TOTAL_MINT_COUNT = 0; //Literally only using these for console.log right now since state doesn't update immediately,
+var MAX_COUNT = 0
+
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const CONTRACT_ADDRESS = "0xCc67C45B52995eF17A56450B860E51eCF0EC362C"; //Ganache local
+  const [totalMintCount, setTotalMintCount] = useState(0);
+  const [maxTokens, setMaxTokens] = useState(0);
+  const CONTRACT_ADDRESS = "0x4315c4cEc4e1A95267489dDF05cF3A2DCCFD60e0"; //Ganache local
   //const CONTRACT_ADDRESS = "0xBB87Fe930703Ff853b63A607c5e6e34f88eF0629"; //Rinkeby local
 
   const checkIfWalletIsConnected = async () => {
@@ -30,7 +34,7 @@ const App = () => {
       const account = accounts[0];
       console.log("Found an authorized account:", account);
       setCurrentAccount(accounts[0]);
-      setupEventListener();
+      //setupEventListener();
     } else {
       console.log("No authorized account found");
     }
@@ -101,6 +105,36 @@ const App = () => {
       console.log(error);
     }
   };
+
+  const getTotalNFTsMintedSoFar = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          myEpicNft.abi,
+          signer
+        );
+
+        
+        TOTAL_MINT_COUNT = (await connectedContract.getTotalMintCount()).toNumber();
+        setTotalMintCount((await connectedContract.getTotalMintCount()).toNumber());
+
+        MAX_COUNT = (await connectedContract.maxTokens()).toNumber();
+        setMaxTokens((await connectedContract.maxTokens()).toNumber());
+        console.log("Total mint count:", TOTAL_MINT_COUNT);
+        console.log("Max allowed tokens", MAX_COUNT);
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const askContractToMintNft = async () => {
     try {
       const { ethereum } = window;
@@ -133,6 +167,7 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+    getTotalNFTsMintedSoFar();
   }, []);
 
   /*
@@ -161,6 +196,7 @@ const App = () => {
               Mint NFT
             </button>
           )}
+          <div style={{color: 'white', paddingTop: '20px'}}>{TOTAL_MINT_COUNT} of {MAX_COUNT} tokens minted!</div>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
