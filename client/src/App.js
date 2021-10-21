@@ -116,7 +116,7 @@ const App = () => {
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
           myEpicNft.abi,
-          signer
+          provider
         );
 
         
@@ -147,6 +147,11 @@ const App = () => {
           myEpicNft.abi,
           signer
         );
+
+        if (totalMintCount => maxTokens){
+          alert("Sorry but the maximum amount of tokens has already been minted");
+          return;
+        }
 
         console.log("Going to pop wallet now to pay gas...");
         let nftTxn = await connectedContract.makeAnEpicNFT();
@@ -196,7 +201,7 @@ const App = () => {
               Mint NFT
             </button>
           )}
-          <div style={{color: 'white', paddingTop: '20px'}}>{TOTAL_MINT_COUNT} of {MAX_COUNT} tokens minted!</div>
+          <div style={{color: 'white', paddingTop: '20px'}}>{totalMintCount} of {maxTokens} tokens minted!</div>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
