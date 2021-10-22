@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/AniName-Mashup-NFT/static/css/main.288bd8fd.chunk.css",
+    "main.js": "/AniName-Mashup-NFT/static/js/main.b943c775.chunk.js",
+    "main.js.map": "/AniName-Mashup-NFT/static/js/main.b943c775.chunk.js.map",
+    "runtime-main.js": "/AniName-Mashup-NFT/static/js/runtime-main.95caf3bc.js",
+    "runtime-main.js.map": "/AniName-Mashup-NFT/static/js/runtime-main.95caf3bc.js.map",
+    "static/js/2.bcb0b9c3.chunk.js": "/AniName-Mashup-NFT/static/js/2.bcb0b9c3.chunk.js",
+    "static/js/2.bcb0b9c3.chunk.js.map": "/AniName-Mashup-NFT/static/js/2.bcb0b9c3.chunk.js.map",
+    "index.html": "/AniName-Mashup-NFT/index.html",
+    "static/css/main.288bd8fd.chunk.css.map": "/AniName-Mashup-NFT/static/css/main.288bd8fd.chunk.css.map",
+    "static/js/2.bcb0b9c3.chunk.js.LICENSE.txt": "/AniName-Mashup-NFT/static/js/2.bcb0b9c3.chunk.js.LICENSE.txt",
+    "static/media/loading-waiting.ccaed95b.gif": "/AniName-Mashup-NFT/static/media/loading-waiting.ccaed95b.gif",
+    "static/media/twitter-logo.a8a75254.svg": "/AniName-Mashup-NFT/static/media/twitter-logo.a8a75254.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.95caf3bc.js",
+    "static/js/2.bcb0b9c3.chunk.js",
+    "static/css/main.288bd8fd.chunk.css",
+    "static/js/main.b943c775.chunk.js"
+  ]
+}
