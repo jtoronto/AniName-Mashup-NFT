@@ -9,7 +9,7 @@ import "hardhat/console.sol";
 // We need to import the helper functions from the contract that we copy/pasted.
 import { Base64 } from "./libraries/Base64.sol";
 
-contract MyEpicNFT is ERC721URIStorage {
+contract AniNameMash is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
@@ -23,15 +23,15 @@ contract MyEpicNFT is ERC721URIStorage {
 
   string[] firstWords = ["Killua", "Josuke", "Katsu", "Gabbagool", "Naruto", "Kreuger", "Sasuke", "Rohan", "Guido", "Bruno", "Dio", "Wang", "Koichi", "Leorio", "Shalnark", "Satotz", "Izuku", "Deku", "Nezuko", "Zenitsu"];
   string[] secondWords = ["Zoldyck", "Valentine", "Karen", "Uzumaki", "Dumpster", "Jotaro", "Giorno", "Kishibe", "Mista", "Buccellati", 
-  "Tonpetty", "Faye", "Moist", "Fire", "L Train", "Joestar", "Uchiha", "Kujo", "Giovanna", "Speedwagon"];
-  string[] thirdWords = ["Bisky", "Faye", "Moist", "Fire", "L Train", "Joestar", "Uchiha", "Kujo", "Giovanna", "Speedwagon", "Chung", "Polnareff", "Hirose", "Paradinight", "Bushwick", "Woodside", "Netero", "Midoriya", "Tanjiro"];
+  "Tonpetty", "Faye", "Rin", "Yukio", "Tsubasa", "Joestar", "Uchiha", "Kujo", "Giovanna", "Speedwagon"];
+  string[] thirdWords = ["Bisky", "Faye", "Araragi", "Senjougahara", "Kakashi", "Joestar", "Uchiha", "Kujo", "Giovanna", "Speedwagon", "Chung", "Polnareff", "Hirose", "Paradinight", "Bushwick", "Woodside", "Netero", "Midoriya", "Tanjiro"];
 
     // Get fancy with it! Declare a bunch of colors.
   string[] colors = ["red", "#08C2A8", "black", "yellow", "blue", "green"];
 
-  event NewEpicNFTMinted(address sender, uint256 tokenId);
+  event NewAniMashMinted(address sender, uint256 tokenId);
 
-  constructor() ERC721 ("SquareNFT", "SQUARE") {
+  constructor() ERC721 ("Anime Name Mash NFT", "ANIMSH") {
     console.log("This is my NFT contract. Woah!");
   }
 
@@ -69,7 +69,7 @@ contract MyEpicNFT is ERC721URIStorage {
       return uint256(keccak256(abi.encodePacked(input)));
   }
 
-  function makeAnEpicNFT() public {
+  function makeAnAniMashNFT() public {
     uint256 newItemId = _tokenIds.current();
 
     require(newItemId <= maxTokens, "Sorry, but we've already minted the max number of tokens");
@@ -90,7 +90,7 @@ contract MyEpicNFT is ERC721URIStorage {
                     '{"name": "',
                     // We set the title of our NFT as the generated word.
                     combinedWord,
-                    '", "description": "A highly acclaimed collection of squares.", "image": "data:image/svg+xml;base64,',
+                    '", "description": "Various anime character names mashed up.", "image": "data:image/svg+xml;base64,',
                     // We add data:image/svg+xml;base64 and then append our base64 encode our svg.
                     Base64.encode(bytes(finalSvg)),
                     '"}'
@@ -115,6 +115,6 @@ contract MyEpicNFT is ERC721URIStorage {
   
     _tokenIds.increment();
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
-    emit NewEpicNFTMinted(msg.sender, newItemId);
+    emit NewAniMashMinted(msg.sender, newItemId);
   }
 }

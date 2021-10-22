@@ -1,13 +1,13 @@
 import "./styles/App.css";
 import twitterLogo from "./assets/twitter-logo.svg";
 import loadingSpinner from "./assets/loading-waiting.gif";
-import myEpicNft from "./utils/MyEpicNFT.json";
+import AniNameMash from "./utils/AniNameMash.json";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
 const TWITTER_HANDLE = "jtoronto34";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-const OPENSEA_LINK = "https://testnets.opensea.io/collection/squarenft-t1q6qkrwm1";
+const OPENSEA_LINK = "https://testnets.opensea.io/collection/anime-name-mash-nft";
 var TOTAL_MINT_COUNT = 0; //Literally only using these for console.log right now since state doesn't update immediately,
 var MAX_COUNT = 0
 
@@ -20,8 +20,8 @@ const App = () => {
   const [currentlyMining, setCurrentlyMining] = useState(false);
 
   const [randomCatImage, setRandomCatImage] = useState();
-  //const CONTRACT_ADDRESS = "0x4315c4cEc4e1A95267489dDF05cF3A2DCCFD60e0"; //Ganache local
-  const CONTRACT_ADDRESS = "0x1267537789277E8f9C0c9F762d1C305a05136275"; //Rinkeby local
+  //const CONTRACT_ADDRESS = "0x14cB57c69D3F8BfE8aB6213Bb2F97eaF5fb98799"; //Ganache local
+  const CONTRACT_ADDRESS = "0x30D0AF864900DAb72CA98557ad6979fD14b30354"; //Rinkeby 
 
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -120,7 +120,7 @@ const App = () => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myEpicNft.abi,
+          AniNameMash.abi,
           signer
         );
 
@@ -128,7 +128,7 @@ const App = () => {
         // This will essentially "capture" our event when our contract throws it.
         // If you're familiar with webhooks, it's very similar to that!
         
-        connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
+        connectedContract.on("NewAniMashMinted", (from, tokenId) => {
           console.log(from, tokenId.toNumber());
           alert(
             `Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
@@ -154,7 +154,7 @@ const App = () => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myEpicNft.abi,
+          AniNameMash.abi,
           provider
         );
 
@@ -187,7 +187,7 @@ const App = () => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myEpicNft.abi,
+          AniNameMash.abi,
           signer
         );
 
@@ -197,7 +197,7 @@ const App = () => {
         }
 
         console.log("Going to pop wallet now to pay gas...");
-        let nftTxn = await connectedContract.makeAnEpicNFT();
+        let nftTxn = await connectedContract.makeAnAniMashNFT();
         setupNFTMinedEventListener();
 
         console.log("Mining...please wait.");
@@ -237,9 +237,9 @@ const App = () => {
 
           }
           
-          <p className="header gradient-text">My NFT Collection</p>
+          <p className="header gradient-text">Anime Name Mashup</p>
           <p className="sub-text">
-            Each unique. Each beautiful. Discover your NFT today.
+            Mash up 3 anime character names and enjoy as an NFT.
           </p>
           {currentAccount === "" ? (
             <button
