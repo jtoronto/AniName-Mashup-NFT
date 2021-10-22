@@ -54,6 +54,18 @@
   animation: gradient-animation 4s ease infinite;
 }
 
+.connectedIndicator{
+  color: red;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.miningIndicator{
+  padding-top: 30px;
+  color: white;
+}
+
 .mint-button {
   background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
   background-size: 200% 200%;
@@ -73,6 +85,8 @@
 
 .footer-container {
   display: flex;
+  flex-direction: column;
+
   justify-content: center;
   align-items: center;
   padding-bottom: 30px;
